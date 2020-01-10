@@ -65,8 +65,8 @@ https://chrome.google.com/webstore/detail/iar-injection/oapdkapkhmpljfoaefgihjhg
 
 ### Section 3
 https://www.raspberrypi.org/forums/viewtopic.php?p=994796#p994796
-https://superuser.com/questions/1343290/disable-chrome-session-restore-popup
 
 ## To Do
-- Need to find a way to get rid of mouse pointer
-- Auto scheduled reboot
+[ ] Need to find a way to get rid of mouse pointer
+[ ] Auto scheduled reboot
+[ ] Auto scheduled updates
