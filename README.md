@@ -68,5 +68,7 @@ https://www.raspberrypi.org/forums/viewtopic.php?p=994796#p994796
 
 ## To Do
 [ ] Need to find a way to get rid of mouse pointer
+
 [ ] Auto scheduled reboot
+
 [ ] Auto scheduled updates
