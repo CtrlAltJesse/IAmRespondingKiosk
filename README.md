@@ -10,14 +10,14 @@ The following guide was made with a Raspberry Pi Zero W, which can be bought bet
 Upon first boot, select and install Raspbian Desktop
 
 ## Section 2 - Setup SSH access
-On your newly setup RasberryPi, open up a terminal and type `sudo raspi-config`. Using the arrow keys, navigate to *Interface Options* then *SSH*. Select *Yes* when asked if you would like to enable SSH server. Select *Finish* to exit. You will need SSH access to this machine once we have fully set this up. You IP address can be obtained via the <ip addr> command.
+On your newly setup RasberryPi, open up a terminal and type `sudo raspi-config`. Using the arrow keys, navigate to *Interface Options* then *SSH*. Select *Yes* when asked if you would like to enable SSH server. Select *Finish* to exit. You will need SSH access to this machine once we have fully set this up. You IP address can be obtained via the `ip addr` command.
   
 ## Section 3 - Chromium Setup
 Either via the terminal on the RaspberryPi or SSH, we need to install Chromium (and update our repo's to ensure we have the latest versions):
 
     sudo apt update && sudo apt install -y chromium-browser
     
-Start Chromium and navigate to `chrome://extensions/`. Delete all extensions, then install [IARInjection](https://chrome.google.com/webstore/detail/iar-injection/oapdkapkhmpljfoaefgihjhgibhcmcda?hl=en-US). Configure the extension with your login details.
+Start Chromium and navigate to `chrome://extensions/`. Delete all extensions, then install [IARInjection](https://chrome.google.com/webstore/detail/iar-injection/oapdkapkhmpljfoaefgihjhgibhcmcda?hl=en-US). Configure the extension with your IAR login details.
 
 ## Section 3 - Package & Final Setup
 Either via the terminal on the RaspberryPi or SSH, we need to set some stuff up. To install the packages we need:
@@ -36,10 +36,9 @@ When in nano, type or copy in the following:
 
 To exit nano [Ctrl]+[x], hitting [y] when asking if it wants you to save.
 
-Please note that if you changed your username from 'pi' during setup, you'll need to change it here and in the following steps the /home/pi is part of the file path. I'm assuming you didn't change it.
+Please note that if you changed your username from 'pi' during setup, you'll need to change it here. I'm assuming you didn't change it.
 
-Launching the Browser at Boot, and Other Things
-We need to tell the RPi to launch the browser at boot. We also need to tell it to keep the screen on: no "blanking" or other power-saving. Since this is a non-interactive display board we want the browser maximized and the mouse cursor disabled.
+Next, we need to tell the Raspberry Pi to launch the browser at boot and disable some of the power settings as this is a non-interactive display board.
 
 To do this, create a new file called '.xsession' in /home/pi (/home/pi/.xsession). Save the following to it: 
 
@@ -51,7 +50,7 @@ To do this, create a new file called '.xsession' in /home/pi (/home/pi/.xsession
     
 To exit nano [Ctrl]+[x], hitting [y] when asking if it wants you to save.
     
-You should now be able to exit and test out your setup by
+You should now be able to exit and test out your setup by rebooting the machine:
 
     sudo shutdown -r now
     
