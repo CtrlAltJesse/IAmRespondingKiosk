@@ -108,7 +108,7 @@ https://crontab.guru/#0_2_*_*_2
 https://help.ubuntu.com/community/AutomaticSecurityUpdates
 
 ## To Do
-[ ] Need to find a way to get rid of mouse pointer
+[X] Need to find a way to get rid of mouse pointer
 
 [X] Auto scheduled reboot
 
