@@ -58,7 +58,7 @@ You should now be able to exit and test out your setup by rebooting the machine:
     
 When you computer reboots, it should launch into the dashboard for I Am Responding automatically.
 
-## Section 4 - Automated Reboot and Updates (Optional, but Recommended)
+## Section 4 - Other things you may want to do
 ### Automatic Reboot
 If you are in the IAmResponding browser window, hit [Ctrl]+[Alt]+[F1] to get to a console.
 
@@ -82,6 +82,11 @@ Then configure the package:
     sudo dpkg-reconfigure --priority=low unattended-upgrades
     
 Highlight and hit [Yes] on the dialoge that comes up.
+
+### Get rid of the mouse pointer
+To get rid of the mouse pointer, simply install `Unclutter`
+
+    sudo apt install -y unclutter
 
 You're done!
 
