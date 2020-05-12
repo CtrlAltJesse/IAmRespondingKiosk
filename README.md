@@ -2,7 +2,9 @@
 Automate and display an IAmResponding dashboard with a RaspberryPi
 
 ## Section 0 - PreReqs & Considerations
-The following guide was made with a Raspberry Pi Zero W, which can be bought between $20 and $30 on Amazon. The I Am Responding dashboard is a bit laggy on this equipment when you have scrolling involved, but otherwise does a pretty good job. You will also need an microSD card of 8gigs or more, and the right stuff to connect up your RaspberryPi to a monitor (HDMI Cable)
+The following guide was made with a Raspberry Pi Zero W, which can be bought between $20 and $30 on Amazon, but should work well with any model Pi. The I Am Responding dashboard is a bit laggy on this equipment when you have scrolling involved, but otherwise does a pretty good job. You will also need an microSD card of 8gigs or more, and the right stuff to connect up your RaspberryPi to a monitor (like a HDMI Cable).
+
+You should be able to display other websites with minimal modifications of the below instructions.
 
 ## Section 1 - Installing NOOBS on your RaspberryPi
 [Download and Install NOOBS on your RaspberryPi](https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up)
@@ -56,19 +58,53 @@ You should now be able to exit and test out your setup by rebooting the machine:
     
 When you computer reboots, it should launch into the dashboard for I Am Responding automatically.
 
+## Section 4 - Automated Reboot and Updates (Optional, but Recommended)
+### Automatic Reboot
+If you are in the IAmResponding browser window, hit [Ctrl]+[Alt]+[F1] to get to a console.
+
+Navigate to crontab, which is where you tell your Pi to run commands at a specified time:
+
+    sudo nano /etc/crontab
+    
+And paste in the following command: (note - `0 2 * * 2` effectively tells the machine `Tuesday at 2am`. [Crontab.guru](https://crontab.guru/) is a great resource to find another time.
+
+    0 2 * * 2 root reboot
+    
+To exit nano [Ctrl]+[x], hitting [y] when asking if it wants you to save.
+
+### Automated Updates
+Updates are a good idea to keep the machine running with modern code and security patches. To have updates run automatically, install and configure `Unattended-Upgrades`
+
+    sudo apt install -y unattended-upgrades
+    
+Then configure the package:
+
+    sudo dpkg-reconfigure --priority=low unattended-upgrades
+    
+Highlight and hit [Yes] on the dialoge that comes up.
+
+You're done!
+
 ## References
 ### Section 1
 https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up
 
-## Section 2
+### Section 2
 https://chrome.google.com/webstore/detail/iar-injection/oapdkapkhmpljfoaefgihjhgibhcmcda?hl=en-US
 
 ### Section 3
 https://www.raspberrypi.org/forums/viewtopic.php?p=994796#p994796
 
+### Section 4
+https://www.raspberrypi.org/forums/viewtopic.php?t=126106
+
+https://crontab.guru/#0_2_*_*_2
+
+https://help.ubuntu.com/community/AutomaticSecurityUpdates
+
 ## To Do
 [ ] Need to find a way to get rid of mouse pointer
 
-[ ] Auto scheduled reboot
+[X] Auto scheduled reboot
 
-[ ] Auto scheduled updates
+[X] Auto scheduled updates
