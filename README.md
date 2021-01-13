@@ -48,7 +48,7 @@ To do this, create a new file called '.xsession' in /home/pi (/home/pi/.xsession
     xset -dpms     # disable DPMS (Energy Star) features.
     xset s off       # disable screen saver
     xset s noblank # don't blank the video device
-    chromium-browser --kiosk --app www.iamresponding.com/v3/Pages/Default.aspx & exec matchbox-window-manager
+    chromium-browser --kiosk --app https://www.iamresponding.com/v3/Pages/memberlogin.aspx & exec matchbox-window-manager
     
 To exit nano [Ctrl]+[x], hitting [y] when asking if it wants you to save.
     
