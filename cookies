@@ -1,0 +1,102 @@
+// ==UserScript==
+// @name         Get rid of IAR Cookie Banner
+// @description  Get rid of IAR Cookie Banner (used for kiosks)
+// @license      http://creativecommons.org/licenses/by-nc-sa/3.0/
+// @downloadURL  Adapted from https://gist.githubusercontent.com/BlaM/6d826d6e9d77d2d77bf9a92fdad55788/raw/cookiebanner-go-away.user.js
+// @homepageURL  Adapted from https://gist.github.com/BlaM/6d826d6e9d77d2d77bf9a92fdad55788
+// @version      0.1
+// @author       Jesse Brennan
+// @match        https://*.iamresponding.com/*
+// @grant        none
+// @run-at       document-idle
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    var config = {
+        selectors: {
+            rules: [              
+              	//IAmResponding Cookie Accept
+                {hostname: /./, action: "click", target: '#rcc-confirm-button'},
+            ],
+        }
+    };
+
+    function doClick(node, selector) {
+        var didSomething = false;
+        for (var i = 0; i < node.length; i++) {
+	    if (!node[i].dataset.cookieAwayClicked) {
+                node[i].click();
+                node[i].dataset.cookieAwayClicked = true;
+                didSomething = true;
+            }
+        }
+        if (didSomething) {
+            console.log('click', selector);
+        }
+    }
+
+    function doRule(rule) {
+        if (typeof rule.hostname == 'string' && rule.hostname !== location.hostname) { return; }
+        if (typeof rule.hostname == 'object' && typeof rule.hostname.match == 'function' && !rule.hostname.match(location.hostname)) { return; }
+
+        if (rule.action == 'remove') { doRemove($$(rule.target), rule.target); }
+        if (rule.action == 'click') { doClick($$(rule.target), rule.target); }
+    }
+
+    var $$ = function(s) {
+        return document.querySelectorAll(s);
+    };
+
+    function getObject(key, defValue) {
+        var obj = window, keys;
+
+        try {
+            keys = key.split('.');
+
+            for (var i = 0; i < keys.length; i++) {
+                obj = obj[keys[i]];
+            }
+        } catch(e) {
+            obj = defValue || null;
+        }
+
+        return typeof obj !== 'undefined'? obj : defValue;
+    };
+
+    function firstCall() {
+        typeof getObject('Cookiebot.dialog.submitConsent') == 'function' && window.Cookiebot.dialog.submitConsent();
+        typeof window.hideCookieHint == 'function' && window.hideCookieHint(true);
+        typeof window.golemAcceptCookies == 'function' && window.golemAcceptCookies();
+        typeof window.CookiesOK == 'function' && window.CookiesOK();
+        typeof getObject('CookieControl.notifyAccept') == 'function' && window.CookieControl.notifyAccept();
+    }
+
+    function delayCall1() {
+        config.selectors.rules = config.selectors.rules.concat(config.selectors.rulesdelay);
+    }
+
+    function delayCall2() {
+    }
+
+    function delayCall5() {
+        typeof window.__cmpui == 'function' && window.__cmpui("setAndSaveAllConsent",!0); // SourceForge
+
+        config.selectors.rules = config.selectors.rules.concat(config.selectors.rulesdelay);
+    }
+
+    function execute() {
+        config.selectors.rules.forEach(doRule);
+    }
+
+    setTimeout(firstCall, 100);
+    setTimeout(execute, 150);
+    setTimeout(execute, 500);
+    setTimeout(delayCall1, 1100);
+    setTimeout(execute, 2000);
+    setTimeout(delayCall2, 2100);
+    setTimeout(execute, 5000);
+    setTimeout(delayCall5, 5100);
+    setTimeout(execute, 10000);
+})();
