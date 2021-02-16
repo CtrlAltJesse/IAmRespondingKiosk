@@ -1,7 +1,7 @@
 # IAmRespondingKiosk
 Automate and display an IAmResponding dashboard with a RaspberryPi
 
-Has your existing dashboard broke with IAR's new cookie acceptance screen - follow the [fix guide here](cookieacceptfix.md).
+Has your existing dashboard broke with IAR's new cookie acceptance screen? Follow the [fix guide here](cookieacceptfix.md).
 
 ## Section 0 - PreReqs & Considerations
 The following guide was made with a Raspberry Pi Zero W, which can be bought between $20 and $30 on Amazon, but should work well with any model Pi. The I Am Responding dashboard is a bit laggy on this equipment when you have scrolling involved, but otherwise does a pretty good job. You will also need an microSD card of 8gigs or more, and the right stuff to connect up your RaspberryPi to a monitor (like a HDMI Cable).
