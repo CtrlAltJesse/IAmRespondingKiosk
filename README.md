@@ -1,6 +1,8 @@
 # IAmRespondingKiosk
 Automate and display an IAmResponding dashboard with a RaspberryPi
 
+Has your existing dashboard broke with IAR's new cookie acceptance screen - follow the [fix guide here](cookieacceptfix.md).
+
 ## Section 0 - PreReqs & Considerations
 The following guide was made with a Raspberry Pi Zero W, which can be bought between $20 and $30 on Amazon, but should work well with any model Pi. The I Am Responding dashboard is a bit laggy on this equipment when you have scrolling involved, but otherwise does a pretty good job. You will also need an microSD card of 8gigs or more, and the right stuff to connect up your RaspberryPi to a monitor (like a HDMI Cable).
 
@@ -19,7 +21,18 @@ Either via the terminal on the RaspberryPi or SSH, we need to install Chromium (
 
     sudo apt update && sudo apt install -y chromium-browser
     
-Start Chromium and navigate to `chrome://extensions/`. Delete all extensions, then install [IARInjection](https://chrome.google.com/webstore/detail/iar-injection/oapdkapkhmpljfoaefgihjhgibhcmcda?hl=en-US). Configure the extension with your IAR login details.
+Start Chromium and navigate to `chrome://extensions/`. Delete all extensions, then install [IARInjection](https://chrome.google.com/webstore/detail/iar-injection/oapdkapkhmpljfoaefgihjhgibhcmcda?hl=en-US) & [TamperMonkey](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en). 
+
+For IARInjection, Configure the extension with your IAR login details.
+
+For TamperMonkey, click on the puzzle piece icon to the right of the URL bar. Then click `Tampermonkey` > `Create a new script`.
+
+Delete everything in the `New Userscript` box, and replace with the contents of the [CookieAccept](cookieaccept) file in this directly. At this point, you will likely have to open up a new tab and search for this GitHub repo on the RasPi itself as it is way to much to hand copy.
+*Note: The simpliest search term I can come up with is 'github ctrlaltjesse iar' to get right to this repo.*
+
+Once copied over, hit [Ctrl] + [S] to save the document.
+
+To test, navigate to `dashboard.iamresponding.com`, you should now be logged into your dashboard with no manual steps needed.
 
 ## Section 3 - Package & Final Setup
 Either via the terminal on the RaspberryPi or SSH, we need to set some stuff up. To install the packages we need:
